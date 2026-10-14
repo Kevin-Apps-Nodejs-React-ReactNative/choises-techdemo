@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import SignInModal from "./SignInModal.component";
+import GetMenuComponents from "../data/MenuComponents.js";
 
-function Navbar({ logoImg, itens, navigation }) {
+function Navbar({ navigation }) {
+    const menu = GetMenuComponents("naologado", {
+        home: () => navigation.navigate("Home"),
+        signUp: () => navigation.navigate("SignUp"),
+        signIn: () => setModalSignInV(true),
+        profile: () => navigation.navigate("Profile"),
+    });
+    const [signinmodalV, setModalSignInV] = useState(false);
+    const handleSignIn = ({ email, password }) => {
+        //Logica de programação
+    }
     return (
         <View style={styles.container}>
             <Image
-                source={logoImg}
+                source={menu.logoImg}
                 style={styles.logo}
                 resizeMode="contain"></Image>
             {
-                itens.map((item, index) => (
+                menu.itens.map((item, index) => (
                     <Pressable
                         key={index}
-                        onPress={() => { navigation.navigate(item.pageName) }}
+                        onPress={item.onPress}
                         style={styles.linkbox}>
                         {
                             item.type === "text" ? (
@@ -29,7 +40,13 @@ function Navbar({ logoImg, itens, navigation }) {
                     </Pressable>
                 ))
             }
-        </View>
+            <SignInModal
+                visible={signinmodalV}
+                onClose={() => setModalSignInV(false)}
+                mode="signin"
+                onSubmit={handleSignIn}>
+            </SignInModal>
+        </View >
     );
 }
 

@@ -1,20 +1,39 @@
-const fucapi_logo = require("../../assets/logo.png")
-const MenuComponents = {
-    "naologado": {
-        logoImg: fucapi_logo,
-        itens:
-            [
-                { label: "HOME", pageName: "Home", type: "text" },
-                { label: "Sign UP", pageName: "SignUp", type: "text" },
-                { pageName: "SignInModal", type: "icon", icon: require("../../assets/signin_icon.png") },
+function GetMenuComponents(status, actions = {}) {
+    const fucapi_logo = require("../../assets/logo.png")
+    const MenuComponents = {
+        naologado: {
+            logoImg: fucapi_logo,
+            itens: [
+                {
+                    label: "HOME",
+                    onPress: actions.home || (() => { }),
+                    type: "text",
+                },
+                {
+                    label: "Sign UP",
+                    onPress: actions.signUp || (() => { }),
+                    type: "text",
+                },
+                {
+                    onPress: actions.signIn || (() => { }),
+                    type: "icon",
+                    icon: require("../../assets/signin_icon.png"),
+                },
             ],
-    },
-    "logado": {
-        logoImg: fucapi_logo,
-        itens: [
-            { label: "Profile", pageName: "SignUp", type: "Text" },
-        ],
-    }
+        },
+        logado: {
+            logoImg: fucapi_logo,
+            itens: [
+                {
+                    label: "Profile",
+                    onPress: actions.profile || (() => { }),
+                    type: "text",
+                },
+            ],
+        },
+    };
+
+    return MenuComponents[status];
 }
 
-export { MenuComponents }
+export default GetMenuComponents
