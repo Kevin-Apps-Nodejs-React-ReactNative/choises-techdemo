@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import SignInModal from "./SignInModal.component";
 import GetMenuComponents from "../data/MenuComponents.js";
+import useSignIn from "../features/HomePage/hook/useSignIn.js";
 
 function Navbar({ navigation }) {
     const menu = GetMenuComponents("naologado", {
@@ -11,9 +12,7 @@ function Navbar({ navigation }) {
         profile: () => navigation.navigate("Profile"),
     });
     const [signinmodalV, setModalSignInV] = useState(false);
-    const handleSignIn = ({ email, password }) => {
-        //Logica de programação
-    }
+    const { handleSignIn, loading } = useSignIn();
     return (
         <View style={styles.container}>
             <Image
