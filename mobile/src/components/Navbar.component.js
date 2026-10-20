@@ -13,6 +13,14 @@ function Navbar({ navigation }) {
     });
     const [signinmodalV, setModalSignInV] = useState(false);
     const { handleSignIn, loading } = useSignIn();
+    const handleLogin = async (email, password) => {
+        try {
+            const result = await handleSignIn(email, password)
+            setModalSignInV(false)
+        } catch (issue) {
+            console.log("erro ao logar")
+        }
+    }
     return (
         <View style={styles.container}>
             <Image
@@ -43,7 +51,7 @@ function Navbar({ navigation }) {
                 visible={signinmodalV}
                 onClose={() => setModalSignInV(false)}
                 mode="signin"
-                onSubmit={handleSignIn}>
+                onSubmit={handleLogin}>
             </SignInModal>
         </View >
     );
