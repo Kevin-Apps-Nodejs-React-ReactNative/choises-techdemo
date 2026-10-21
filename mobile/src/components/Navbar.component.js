@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import SignInModal from "./SignInModal.component";
+import AuthModal from "./AuthModal.component.js";
 import GetMenuComponents from "../data/MenuComponents.js";
 import useSignIn from "../features/HomePage/hook/useSignIn.js";
 
 function Navbar({ navigation }) {
     const menu = GetMenuComponents("naologado", {
         home: () => navigation.navigate("Home"),
-        signUp: () => navigation.navigate("SignUp"),
-        signIn: () => setModalSignInV(true),
+        signUp: () => {
+            setModalMode("signup")
+            setModalAuthV(true)
+        },
+        signIn: () => {
+            setModalMode("signin")
+            setModalAuthV(true)
+        },
         profile: () => navigation.navigate("Profile"),
     });
-    const [signinmodalV, setModalSignInV] = useState(false);
+    const [signinmodalV, setModalAuthV] = useState(false);
+    const [modalmode, setModalMode] = useState("");
     const { handleSignIn, loading } = useSignIn();
     const handleLogin = async (email, password) => {
         try {
@@ -49,8 +56,8 @@ function Navbar({ navigation }) {
             }
             <SignInModal
                 visible={signinmodalV}
-                onClose={() => setModalSignInV(false)}
-                mode="signin"
+                onClose={() => setModalAuthV(false)}
+                mode={modalmode}
                 onSubmit={handleLogin}>
             </SignInModal>
         </View >
