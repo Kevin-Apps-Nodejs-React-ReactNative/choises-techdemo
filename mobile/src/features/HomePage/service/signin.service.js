@@ -1,4 +1,6 @@
-async function SignIn({ email, password }) {
+async function SignIn({ user }) {
+    const email = user.email;
+    const password = user.password
     const response = await fetch("https://choises-techdemo.onrender.com/signin", {
         method: "POST",
         headers: {

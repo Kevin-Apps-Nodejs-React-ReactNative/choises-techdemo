@@ -3,9 +3,9 @@ import SignIn from "../service/signin.service.js";
 
 function useSignIn() {
     const [loading, setLoading] = useState(false)
-    const handleSignIn = async ({ email, password }) => {
+    const handleSignIn = async ({ user }) => {
         try {
-            const result = await SignIn({ email, password })
+            const result = await SignIn({ user })
             setLoading(true)
             console.log("Usuario Logado", result)
         } finally {

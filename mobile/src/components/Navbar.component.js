@@ -17,12 +17,12 @@ function Navbar({ navigation }) {
         },
         profile: () => navigation.navigate("Profile"),
     });
-    const [signinmodalV, setModalAuthV] = useState(false);
+    const [authmodalV, setModalAuthV] = useState(false);
     const [modalmode, setModalMode] = useState("");
     const { handleSignIn, loading } = useSignIn();
-    const handleLogin = async (email, password) => {
+    const handleSubmit = async (user) => {
         try {
-            const result = await handleSignIn(email, password)
+            if (modalmode === "signin") const result = await handleSignIn(user)
             setModalSignInV(false)
         } catch (issue) {
             console.log("erro ao logar")
@@ -54,12 +54,12 @@ function Navbar({ navigation }) {
                     </Pressable>
                 ))
             }
-            <SignInModal
-                visible={signinmodalV}
+            <AuthModal
+                visible={authmodalV}
                 onClose={() => setModalAuthV(false)}
                 mode={modalmode}
-                onSubmit={handleLogin}>
-            </SignInModal>
+                onSubmit={handleSubmit}>
+            </AuthModal>
         </View >
     );
 }

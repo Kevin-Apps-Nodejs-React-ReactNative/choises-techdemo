@@ -14,8 +14,11 @@ import SignInForm from "./SignInForm.component.js";
 import SignUpForm from "./SignUpForm.component.js";
 
 function AuthModal({ visible, onClose, mode, onSubmit }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [user, setUser] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
 
     const isSignIn = mode === "signin";
 
@@ -34,27 +37,27 @@ function AuthModal({ visible, onClose, mode, onSubmit }) {
                             style={styles.card}
                         >
 
-                            {isSignIn ? () => {
+                            {isSignIn ? (
                                 <View>
                                     <Text style={styles.title}>
                                         "Logar:"
                                     </Text>
-                                    <SignInForm></SignInForm>
+                                    <SignInForm
+                                        data={user}></SignInForm>
                                 </View>
-                            } : () => {
+                            ) : (
                                 <View>
                                     <Text style={styles.title}>
                                         "Cadastrar:"
                                     </Text>
-                                    <SignUpForm></SignUpForm>
+                                    <SignUpForm
+                                        data={user}></SignUpForm>
                                 </View>
-
-                            }
-                            }
+                            )}
 
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => onSubmit({ email, password })}
+                                onPress={() => onSubmit({ user })}
                             >
                                 <Text style={styles.buttonLabel}>
                                     {isSignIn ? "Entrar" : "Criar conta"}
