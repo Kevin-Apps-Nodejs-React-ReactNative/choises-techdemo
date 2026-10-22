@@ -22,8 +22,11 @@ function Navbar({ navigation }) {
     const { handleSignIn, loading } = useSignIn();
     const handleSubmit = async (user) => {
         try {
-            if (modalmode === "signin") const result = await handleSignIn(user)
-            setModalSignInV(false)
+            if (modalmode === "signin") {
+                const result = await handleSignIn(user)
+                console.log("Dados do usuario", result)
+            }
+            setModalAuthV(false)
         } catch (issue) {
             console.log("erro ao logar")
         }

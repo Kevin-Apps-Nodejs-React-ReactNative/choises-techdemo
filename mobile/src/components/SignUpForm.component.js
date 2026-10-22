@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { TextInput, View } from "react-native";
 
-function SignUpForm({ data }) {
+function SignUpForm({ data, onChangeData }) {
     return (
         <View>
             <TextInput
                 placeholder="Nome de usuario"
-                value={username}
-                onChangeText={data.username}
+                value={data.username}
+                onChangeText={(value) => onChangeData("username", value)}
             >
             </TextInput>
             <TextInput
                 placeholder="Email"
-                value={email}
-                onChangeText={data.email}>
+                value={data.email}
+                onChangeText={(value) => onChangeData("email", value)}>
 
             </TextInput>
         </View>

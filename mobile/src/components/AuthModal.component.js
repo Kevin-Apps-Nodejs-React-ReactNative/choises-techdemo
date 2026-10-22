@@ -40,18 +40,20 @@ function AuthModal({ visible, onClose, mode, onSubmit }) {
                             {isSignIn ? (
                                 <View>
                                     <Text style={styles.title}>
-                                        "Logar:"
+                                        Logar:
                                     </Text>
                                     <SignInForm
-                                        data={user}></SignInForm>
+                                        data={user}
+                                        onChangeData={setUser}></SignInForm>
                                 </View>
                             ) : (
                                 <View>
                                     <Text style={styles.title}>
-                                        "Cadastrar:"
+                                        Cadastrar:
                                     </Text>
                                     <SignUpForm
-                                        data={user}></SignUpForm>
+                                        data={user}
+                                        onChangeData={setUser}></SignUpForm>
                                 </View>
                             )}
 

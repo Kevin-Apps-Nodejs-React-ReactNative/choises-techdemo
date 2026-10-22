@@ -4,13 +4,13 @@ import { View, TextInput, StyleSheet } from "react-native";
 
 
 
-function SignInForm({ data }) {
+function SignInForm({ data, onChangeData }) {
     return (
         <View>
             <TextInput
                 placeholder="Email"
-                value={email}
-                onChangeText={data.email}
+                value={data.email}
+                onChangeText={(value) => onChangeData("email", value)}
                 style={styles.input}
                 placeholderTextColor="#7b7b7b"
                 autoCapitalize="none"
@@ -19,8 +19,8 @@ function SignInForm({ data }) {
 
             <TextInput
                 placeholder="Senha"
-                value={password}
-                onChangeText={data.password}
+                value={data.password}
+                onChangeText={(value) => onChangeData("password", value)}
                 secureTextEntry
                 style={styles.input}
                 placeholderTextColor="#7b7b7b"
