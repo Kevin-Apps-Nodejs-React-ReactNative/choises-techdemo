@@ -1,18 +1,17 @@
 import { useState } from "react";
 import SignIn from "../service/signin.service.js";
 
-function useSignIn() {
-    const [loading, setLoading] = useState(false)
-    const handleSignIn = async ({ user }) => {
+function useSignIn(loading) {
+    const handleSignIn = async (user) => {
+        loading(true)
         try {
-            const result = await SignIn({ user })
-            setLoading(true)
-            console.log("Usuario Logado", result)
+            const result = await SignIn(user)
+            return result
         } finally {
-            setLoading(false)
+            loading(false)
         }
     }
-    return { handleSignIn, loading }
+    return handleSignIn
 }
 
 export default useSignIn

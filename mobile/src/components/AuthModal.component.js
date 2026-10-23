@@ -19,6 +19,9 @@ function AuthModal({ visible, onClose, mode, onSubmit }) {
         email: "",
         password: "",
     });
+    const handleChangeData = (field, value) => {
+        setUser((prev) => ({ ...prev, [field]: value }));
+    };
 
     const isSignIn = mode === "signin";
 
@@ -44,7 +47,7 @@ function AuthModal({ visible, onClose, mode, onSubmit }) {
                                     </Text>
                                     <SignInForm
                                         data={user}
-                                        onChangeData={setUser}></SignInForm>
+                                        onChangeData={handleChangeData}></SignInForm>
                                 </View>
                             ) : (
                                 <View>
@@ -53,7 +56,7 @@ function AuthModal({ visible, onClose, mode, onSubmit }) {
                                     </Text>
                                     <SignUpForm
                                         data={user}
-                                        onChangeData={setUser}></SignUpForm>
+                                        onChangeData={handleChangeData}></SignUpForm>
                                 </View>
                             )}
 

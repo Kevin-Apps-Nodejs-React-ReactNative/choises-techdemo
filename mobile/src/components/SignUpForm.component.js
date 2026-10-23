@@ -16,6 +16,11 @@ function SignUpForm({ data, onChangeData }) {
                 onChangeText={(value) => onChangeData("email", value)}>
 
             </TextInput>
+            <TextInput
+                placeholder="Senha"
+                value={data.password}
+                onChangeText={(value) => onChangeData("password", value)}>
+            </TextInput>
         </View>
     );
 }

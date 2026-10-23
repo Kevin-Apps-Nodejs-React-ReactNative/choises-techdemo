@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import AuthModal from "./AuthModal.component.js";
 import GetMenuComponents from "../data/MenuComponents.js";
 import useSignIn from "../features/HomePage/hook/useSignIn.js";
+import useSignUp from "../features/HomePage/hook/useSignUp.js";
 
 function Navbar({ navigation }) {
     const menu = GetMenuComponents("naologado", {
@@ -17,18 +18,25 @@ function Navbar({ navigation }) {
         },
         profile: () => navigation.navigate("Profile"),
     });
+    const [loading, setLoading] = useState(false)
     const [authmodalV, setModalAuthV] = useState(false);
     const [modalmode, setModalMode] = useState("");
-    const { handleSignIn, loading } = useSignIn();
+    const handleSignIn = useSignIn(setLoading);
+    const handleSignUp = useSignUp(setLoading);
     const handleSubmit = async (user) => {
         try {
             if (modalmode === "signin") {
                 const result = await handleSignIn(user)
-                console.log("Dados do usuario", result)
+                console.log("Dados do Usuario: ", result)
+            }
+            if (modalmode === "signup") {
+                const result = await handleSignUp(user)
+                console.log("Usuario Cadastrado: ", result)
             }
             setModalAuthV(false)
         } catch (issue) {
-            console.log("erro ao logar")
+            console.log("erro ao logar",
+                issue?.message ?? issue)
         }
     }
     return (
