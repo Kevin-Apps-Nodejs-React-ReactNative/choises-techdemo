@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8081;
 app.use(express.json());
 
 //Rotas publicas
-app.use('/signup', authMiddleWare, signUpRouter);
+app.use('/signup', signUpRouter);
 app.use('/signin', signInRouter);
 
 //Rotas privadas
